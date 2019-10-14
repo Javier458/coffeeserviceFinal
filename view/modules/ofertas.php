@@ -14,7 +14,7 @@ if(isset($agregar) && isset($cantidad)){
 
     if(mysqli_num_rows($v) > 0){
 
-    $q = $mysqli->query("UPDATE carrito SET cantidad = cantidad + $cantidad WHERE idCliente = '$idCliente'");
+    $q = $mysqli->query("UPDATE carrito SET cantidad = cantidad + $cantidad WHERE idCliente = '$idCliente' AND idProducto = '$idProducto'");
 
 }else{
     
@@ -26,38 +26,39 @@ if(isset($agregar) && isset($cantidad)){
 }
 
 
-$q = $mysqli -> query("SELECT * FROM  producto WHERE oferta > 0 ORDER BY idProducto DESC");
+$q = $mysqli -> query("SELECT * FROM producto WHERE oferta > 0 ORDER BY idProducto DESC");
 while($r = mysqli_fetch_array($q)){
 
-$precioDescuento = 0;
+    $precioDescuento = 0;
 
-    if($r['oferta'] > 0){
-        if(strlen($r['oferta']) == 1){
-            $desc = "0.0".$r['oferta'];
-        }elseif($r['oferta'] == 100){
-            $desc = 1;
-        }else{
-            $desc = "0.".$r['oferta'];
-        }
-        $precioDescuento = $r['price'] - ($r['price'] * $desc);  
+if($r['oferta'] > 0){
+    if(strlen($r['oferta']) == 1){
+        $desc = "0.0".$r['oferta'];
     }else{
-        $precioDescuento = $r['price'];
+        $desc = "0.".$r['oferta'];
     }
-    ?>
-    
-    <div class="cards">
-        <div class="productos">
-      <img src="products/<?=$r['imagen']?>" class="card-img-top" alt="<?=$r['name']?>">
-      <div class="card-body">
-        <h5 class="card-title"><?=$r['name']?></h5>
-        <p class="card-text"><?=$r['description']?></p>
-        <span class="precio"><b><?php if($precioDescuento == 0){ echo "GRATIS"; }else{ echo $precioDescuento.$divisa;}?></b></span>
-        <br><br><del><?=$r['price']?><?=$divisa?></del>
-        <br><br>
-        <button class="btn btn-success" onclick="addCar('<?=$r['idProducto']?>');"><i class="icon icon-cart"></i>&nbsp;Agregar</button>
-      </div>
-    </div>
-    </div>
+    $precioDescuento = $r['price'] - ($r['price'] * $desc);  
+}else{
+    $precioDescuento = $r['price'];
+}
+
+
+
+?>
+
+<div class="cards">
+    <div class="productos">
+  <img src="products/<?=$r['imagen']?>" class="card-img-top" alt="<?=$r['name']?>">
+  <div class="card-body">
+    <h5 class="card-title"><?=$r['name']?></h5>
+    <p class="card-text"><?=$r['description']?></p>
+<span class="precio"><b><?php if($precioDescuento == 0){ echo "GRATIS"; }else{ echo $precioDescuento.$divisa;}?></b></span>
+<br><br><del><?=$r['price']?><?=$divisa?></del>
+    <br><br>
+    <button class="btn btn-success" onclick="addCar('<?=$r['idProducto']?>');"><i class="icon icon-cart"></i>&nbsp;Agregar</button>
+  </div>
+</div>
+</div>
 <?php
 }
 

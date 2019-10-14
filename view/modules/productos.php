@@ -14,7 +14,7 @@ if(isset($agregar) && isset($cantidad)){
 
     if(mysqli_num_rows($v) > 0){
 
-    $q = $mysqli->query("UPDATE carrito SET cantidad = cantidad + $cantidad WHERE idCliente = '$idCliente'");
+    $q = $mysqli->query("UPDATE carrito SET cantidad = cantidad + $cantidad WHERE idCliente = '$idCliente' AND idProducto = '$idProducto'");
 
 }else{
     

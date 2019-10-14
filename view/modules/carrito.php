@@ -48,6 +48,8 @@ if(isset($finalizar)){
         <th>Nombre Producto</th>
         <th>Cantidad</th>
         <th>Precio c/u</th>
+        <th>Oferta</th>
+        <th>Precio con Descuento</th>
         <th>Precio Total</th>
     </tr>
   </thead>
@@ -63,12 +65,27 @@ while($r = mysqli_fetch_array($q)){
 $q2 = $mysqli->query("SELECT * FROM producto WHERE idProducto = '".$r['idProducto']."'");
 $r2 = mysqli_fetch_array($q2);
 
+$precioDescuento = 0;
+
+if($r2['oferta'] > 0){
+    if(strlen($r2['oferta']) == 1){
+    $desc = "0.0".$r2['oferta'];
+      }elseif($r2['oferta'] == 100){
+        $desc = 1;
+      }else{
+        $desc = "0.".$r2['oferta'];
+      }
+        $precioDescuento = $r2['price'] - ($r2['price'] * $desc);  
+    }else{
+        $precioDescuento = $r2['price'];
+}
+
 $imagen = $r2['imagen'];
 $nombreProducto = $r2['name'];
 $cantidad = $r['cantidad'];
 $precioUnidad = $r2['price'];
-$precioTotal = $cantidad * $precioUnidad;
-
+$precioTotal = $cantidad * $precioDescuento;
+$oferta = $r2['oferta'].$descuento;
 $montoTotal = $montoTotal + $precioTotal;
 
     ?>
@@ -78,6 +95,8 @@ $montoTotal = $montoTotal + $precioTotal;
       <td><?=$nombreProducto?></td>
       <td><?=$cantidad?></td>
       <td><?=$divisa2?><?=$precioUnidad?></td>
+      <td><?=$oferta?></td>
+      <td><?=$divisa2?><?=$precioDescuento?></td>
       <td><?=$divisa2?><?=$precioTotal?></td>
     </tr>
   </tbody>
@@ -96,6 +115,3 @@ $montoTotal = $montoTotal + $precioTotal;
     <input type="hidden" name="montoTotal" value="<?=$montoTotal?>">
 <button class="btn btn-outline-success" type="submit" name="finalizar"><b><i class="icon icon-cart"></i> Finalizar Compra</b></button>
 </form>
-
-
-
