@@ -18,7 +18,7 @@ if(!isset($p)){
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" type="text/css" href="css/index11.css">
+	<link rel="stylesheet" type="text/css" href="css/index12.css">
 	<link rel="stylesheet" type="text/css" href="library/icomoon/style3.css">
 	<link rel="stylesheet" href="library/bootstrap/css/bootstrap.min.css" >
 
