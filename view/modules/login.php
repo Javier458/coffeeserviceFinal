@@ -28,19 +28,15 @@ if(isset($submit)){
 
 <h1 class="title_admin">Iniciar Sesi&oacute;n</h1>
 
-    
-<form class="form-3" method="POST" action="">
-    <p class="clearfix">
-        <label for="login"><i class="icon icon-envelop"></i> Correo</label>
-        <input type="text" name="email" id="email" placeholder="Ingresar Correo">
-    </p>
-    <p class="clearfix">
-        <label for="password"><i class="icon icon-key"></i> Contrase&ntilde;a</label>
-        <input type="password" name="password" id="password" placeholder="Contrase&ntilde;a"> 
-    </p>
-    <div class="btnadmin">
-    <p class="clearfix-btn">
-    <button type="submit" name="submit" class="btn btn-outline-primary"><i class="icon icon-user-plus"></i>  Ingresar</button>
-    </p>
-    </div>       
+<form method="POST" action="">
+  <div class="form-group">
+    <label class="labellogin" for="login"><i class="icon icon-envelop"></i> &nbsp;Correo</label>
+    <input type="email" class="form-control" name="email" id="email" placeholder="Ingresar Correo" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo con alguien más.</small>
+  </div>
+  <div class="form-group">
+    <label class="labellogin" for="password"><i class="icon icon-key2"></i> Contrase&ntilde;a</label>
+    <input type="password" class="form-control" name="password" id="password" placeholder="Contrase&ntilde;a">
+  </div>
+  <button type="submit" name="submit" class="btn btn-outline-primary"><i class="icon icon-user-plus"></i>  Ingresar</button>
 </form>

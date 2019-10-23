@@ -47,21 +47,17 @@ if(isset($_SESSION['id'])){ //Si hay una sesión inicada
     ?>
 <h1 class="title_admin">Iniciar Sesi&oacute;n como administrador</h1>
 
-    
-<form class="form-3" method="POST" action="">
-    <p class="clearfix">
-        <label for="login"><i class="icon icon-user-tie"></i> Administrador</label>
-        <input type="text" name="adminname" id="adminname" placeholder="Nombre de Administrador">
-    </p>
-    <p class="clearfix">
-        <label for="password"><i class="icon icon-key2"></i> Contrase&ntilde;a</label>
-        <input type="password" name="password" id="password" placeholder="Contrase&ntilde;a"> 
-    </p>
-    <div class="btnadmin">
-    <p class="clearfix-btn">
-    <button type="submit" name="submit" class="btn btn-outline-primary"><i class="icon icon-user-plus"></i>  Ingresar</button>
-    </p>
-    </div>       
+<form method="POST" action="">
+  <div class="form-group">
+    <label class="labellogin" for="login"><i class="icon icon-user-tie"></i> Administrador</label>
+    <input type="text" class="form-control" name="adminname" id="adminname" placeholder="Nombre de Administrador" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su nombre de administrador con alguien más.</small>
+  </div>
+  <div class="form-group">
+    <label class="labellogin" for="password"><i class="icon icon-key2"></i> Contrase&ntilde;a</label>
+    <input type="password" class="form-control" name="password" id="password" placeholder="Contrase&ntilde;a">
+  </div>
+  <button type="submit" name="submit" class="btn btn-outline-primary"><i class="icon icon-user-plus"></i>  Ingresar</button>
 </form>
 
     <?php

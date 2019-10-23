@@ -18,8 +18,8 @@ if(!isset($p)){
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" type="text/css" href="css/index12.css">
-	<link rel="stylesheet" type="text/css" href="library/icomoon/style3.css">
+	<link rel="stylesheet" type="text/css" href="css/index15.css">
+	<link rel="stylesheet" type="text/css" href="library/icomoon/style.css">
 	<link rel="stylesheet" href="library/bootstrap/css/bootstrap.min.css" >
 
 	<title>CoffeeService</title>
@@ -35,21 +35,24 @@ CoffeeService
 </div>
 
 <header>
+<div class="menu_hamburguesa">
+	<a href="#" class="bt-menu"><span class="icon-menu"></span> Menú</a>
+</div>
 <nav>
 <ul>
-	<li><a href="?p=principal"><span class="primero"><i class="icon icon-home"></i></span>Principal</a></li>
-	<li><a href="?p=productos"><span class="segundo"><i class="icon icon-price-tags"></i></span>Productos</a></li>
-	<li><a href="?p=ofertas"><span class="tercero"><i class="icon icon-price-tag"></i></span>Ofertas</a></li>
-	<li><a href="?p=carrito"><span class="cuarto"><i class="icon icon-cart"></i></span>Carrito</a></li>
-	<li><a href="?p=admin"><span class="quinto"><i class="icon icon-user-tie"></i></span>Administrador</a></li>
+	<li class="t1"><a href="?p=principal"><span class="primero"><i class="icon icon-home"></i></span>Principal</a></li>
+	<li class="t2"><a href="?p=productos"><span class="segundo"><i class="icon icon-price-tags"></i></span>Productos</a></li>
+	<li class="t3"><a href="?p=ofertas"><span class="tercero"><i class="icon icon-price-tag"></i></span>Ofertas</a></li>
+	<li class="t4"><a href="?p=carrito"><span class="cuarto"><i class="icon icon-cart"></i></span>Carrito</a></li>
+	<li class="t5"><a href="?p=admin"><span class="quinto"><i class="icon icon-user-tie"></i></span>Administrador</a></li>
 
 <?php
 if(isset($_SESSION['idCliente'])){
 ?>
 
 
-	<li><a href="?p=perfil"><span class="sexto"><i class="icon icon-profile"></i></span><?=nameCliente($_SESSION['idCliente'])?></a></li>
-	<li><a href="?p=logout"><span class="septimo"><i class="icon icon-enter"></i></span>Cerrar Sesión</a></li>
+	<li class="t6"><a href="?p=perfil"><span class="sexto"><i class="icon icon-profile"></i></span><?=nameCliente($_SESSION['idCliente'])?></a></li>
+	<li class="t7"><a href="?p=logout"><span class="septimo"><i class="icon icon-enter"></i></span>Cerrar Sesión</a></li>
 <?php
 }
 ?>
@@ -70,44 +73,7 @@ if(file_exists("modules/".$p.".php")){
 
 ?>
 
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <footer>
        
@@ -200,6 +166,9 @@ if(file_exists("modules/".$p.".php")){
 		 
 	 </footer>
 	 <scroll-page id="page-1"></scroll-page>
+
+	 <script src="js/main.js"></script>
+	 <script src="js/menu.js"></script>
 
 </body>
 </html>
