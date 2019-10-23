@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 18-10-2019 a las 01:47:14
--- Versión del servidor: 5.7.26
--- Versión de PHP: 7.2.18
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 23-10-2019 a las 16:04:52
+-- Versión del servidor: 10.1.22-MariaDB
+-- Versión de PHP: 7.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,14 +28,12 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
   `names` varchar(40) NOT NULL,
   `adminname` varchar(150) NOT NULL,
-  `password` varchar(16) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `password` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `admin`
@@ -50,13 +48,11 @@ INSERT INTO `admin` (`id`, `names`, `adminname`, `password`) VALUES
 -- Estructura de tabla para la tabla `carrito`
 --
 
-DROP TABLE IF EXISTS `carrito`;
-CREATE TABLE IF NOT EXISTS `carrito` (
-  `idCarrito` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `carrito` (
+  `idCarrito` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  PRIMARY KEY (`idCarrito`)
+  `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -65,12 +61,10 @@ CREATE TABLE IF NOT EXISTS `carrito` (
 -- Estructura de tabla para la tabla `categoria`
 --
 
-DROP TABLE IF EXISTS `categoria`;
-CREATE TABLE IF NOT EXISTS `categoria` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nameCategoria` varchar(40) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+CREATE TABLE `categoria` (
+  `id` int(11) NOT NULL,
+  `nameCategoria` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `categoria`
@@ -88,21 +82,20 @@ INSERT INTO `categoria` (`id`, `nameCategoria`) VALUES
 -- Estructura de tabla para la tabla `cliente`
 --
 
-DROP TABLE IF EXISTS `cliente`;
-CREATE TABLE IF NOT EXISTS `cliente` (
-  `idCliente` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cliente` (
+  `idCliente` int(11) NOT NULL,
   `nameCliente` varchar(40) NOT NULL,
+  `apellidoCliente` varchar(40) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `password` varchar(16) NOT NULL,
-  PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `password` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`idCliente`, `nameCliente`, `email`, `password`) VALUES
-(1, 'Javier', 'javier@cfs.co', '1234');
+INSERT INTO `cliente` (`idCliente`, `nameCliente`, `apellidoCliente`, `email`, `password`) VALUES
+(1, 'Javier', 'Galvis', 'javier@cfs.co', '1234');
 
 -- --------------------------------------------------------
 
@@ -110,15 +103,13 @@ INSERT INTO `cliente` (`idCliente`, `nameCliente`, `email`, `password`) VALUES
 -- Estructura de tabla para la tabla `factura`
 --
 
-DROP TABLE IF EXISTS `factura`;
-CREATE TABLE IF NOT EXISTS `factura` (
-  `idFactura` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `factura` (
+  `idFactura` int(11) NOT NULL,
   `idCliente` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
   `monto` float NOT NULL,
-  `status` int(11) NOT NULL,
-  PRIMARY KEY (`idFactura`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `factura`
@@ -137,7 +128,8 @@ INSERT INTO `factura` (`idFactura`, `idCliente`, `fecha`, `monto`, `status`) VAL
 (10, 1, '2019-10-14 02:21:58', 25500, 0),
 (11, 1, '2019-10-14 02:28:14', 33750, 0),
 (12, 1, '2019-10-14 02:34:06', 14000, 0),
-(13, 1, '2019-10-14 02:37:16', 2500, 0);
+(13, 1, '2019-10-14 02:37:16', 2500, 0),
+(14, 1, '2019-10-23 08:58:21', 8300, 0);
 
 -- --------------------------------------------------------
 
@@ -145,17 +137,15 @@ INSERT INTO `factura` (`idFactura`, `idCliente`, `fecha`, `monto`, `status`) VAL
 -- Estructura de tabla para la tabla `producto`
 --
 
-DROP TABLE IF EXISTS `producto`;
-CREATE TABLE IF NOT EXISTS `producto` (
-  `idProducto` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `producto` (
+  `idProducto` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
   `price` float NOT NULL,
   `description` varchar(255) NOT NULL,
   `imagen` varchar(255) NOT NULL,
   `oferta` int(11) NOT NULL,
-  `idCategoria` int(11) NOT NULL,
-  PRIMARY KEY (`idProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `idCategoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `producto`
@@ -175,15 +165,13 @@ INSERT INTO `producto` (`idProducto`, `name`, `price`, `description`, `imagen`, 
 -- Estructura de tabla para la tabla `productos_compra`
 --
 
-DROP TABLE IF EXISTS `productos_compra`;
-CREATE TABLE IF NOT EXISTS `productos_compra` (
-  `idCP` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `productos_compra` (
+  `idCP` int(11) NOT NULL,
   `idFactura` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `monto` float NOT NULL,
-  PRIMARY KEY (`idCP`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+  `monto` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `productos_compra`
@@ -220,7 +208,130 @@ INSERT INTO `productos_compra` (`idCP`, `idFactura`, `idProducto`, `cantidad`, `
 (28, 11, 2, 1, 100000000),
 (29, 12, 4, 1, 2500),
 (30, 12, 5, 2, 6000),
-(31, 13, 6, 1, 2500);
+(31, 13, 6, 1, 2500),
+(32, 14, 4, 1, 2500),
+(33, 14, 3, 1, 7000);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  ADD PRIMARY KEY (`idCarrito`),
+  ADD KEY `idCliente` (`idCliente`),
+  ADD KEY `idProducto` (`idProducto`);
+
+--
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idCliente`);
+
+--
+-- Indices de la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD PRIMARY KEY (`idFactura`),
+  ADD KEY `idCliente` (`idCliente`);
+
+--
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`idProducto`),
+  ADD KEY `idCategoria` (`idCategoria`);
+
+--
+-- Indices de la tabla `productos_compra`
+--
+ALTER TABLE `productos_compra`
+  ADD PRIMARY KEY (`idCP`),
+  ADD KEY `idFactura` (`idFactura`),
+  ADD KEY `idProducto` (`idProducto`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  MODIFY `idCarrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `factura`
+--
+ALTER TABLE `factura`
+  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `productos_compra`
+--
+ALTER TABLE `productos_compra`
+  MODIFY `idCP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `productos_compra`
+--
+ALTER TABLE `productos_compra`
+  ADD CONSTRAINT `productos_compra_ibfk_1` FOREIGN KEY (`idFactura`) REFERENCES `factura` (`idFactura`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `productos_compra_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
