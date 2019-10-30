@@ -7,6 +7,6 @@
     <title>Inicio | CoffeeService</title>
 </head>
 <body>
-
+Esta es la página principal...
 </body>
 </html>

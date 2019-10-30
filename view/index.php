@@ -11,6 +11,13 @@ if(!isset($p)){
 
 ?>
 
+<?php
+$idCliente = clear($_SESSION['idCliente']);
+
+$q = $mysqli->query("SELECT * FROM cliente WHERE idCliente = '$idCliente'");
+$r = mysqli_fetch_array($q);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,11 +58,19 @@ if(isset($_SESSION['idCliente'])){
 ?>
 
 
-	<li class="t6"><a href="?p=perfil"><span class="sexto"><i class="icon icon-profile"></i></span><?=nameCliente($_SESSION['idCliente'])?></a></li>
+	<li class="t6"><a href="?p=perfil"><span class="sexto"><i class="icon icon-profile"></i></span>
+	<img src="user-photos/<?=$r['foto']?>" class="rounded float-left" alt="<?=$r['nameCliente']?>" width="30" height="30">
+	<?=nameCliente($_SESSION['idCliente'])?></a></li>
 	<li class="t7"><a href="?p=logout"><span class="septimo"><i class="icon icon-enter"></i></span>Cerrar Sesión</a></li>
+<?php
+}else{
+?>
+	<li class="t7"><a href="?p=register"><span class="septimo"><i class="icon icon-user-plus"></i></span>Registro</a></li>
+	<li class="t6"><a href="?p=login"><span class="sexto"><i class="icon icon-user"></i></span>Iniciar Sesi&oacute;n</a></li>
 <?php
 }
 ?>
+
 
 
 </ul>
